@@ -21,8 +21,7 @@ export default function Login() {
     });
 
     const onSubmit = (data) => {
-        localStorage.setItem("userEmail", data.email);
-        localStorage.setItem("userPassword", data.pass);
+        localStorage.setItem("userRegistered", JSON.stringify(data));
 
         console.log("Usuario registrado:", data);
         navigate("/PantallaPrincipal");
