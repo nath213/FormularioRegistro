@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PantallaPrincipal() {
     const navigate = useNavigate();
+    const [numAttempt, setnumAttempt] = useState(2);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -11,10 +12,14 @@ export default function PantallaPrincipal() {
         const storedEmail = localStorage.getItem("userEmail");
         const storedPassword = localStorage.getItem("userPassword");
 
-        if (email === storedEmail && password === storedPassword) {
+        if (email === storedEmail && password === storedPassword && numAttempt >= 0) {
             navigate("/PantallaInicioSesion");
         } else {
-            setError("Correo o contraseña incorrectos");
+            setError("Correo o contraseña incorrectos. Número de intentos permitidos: " + numAttempt);
+
+            numAttempt >= 0 ?
+            setnumAttempt(numAttempt - 1) :
+            setError("Se ha bloqueado tu acceso, intentalo mas tarde")
         }
     };
 
@@ -35,7 +40,7 @@ export default function PantallaPrincipal() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            /><br />
+            /><br /> <br />
 
             <button type="button" onClick={handleLogin}>Iniciar sesión</button>
 
