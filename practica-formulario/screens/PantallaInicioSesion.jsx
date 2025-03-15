@@ -5,10 +5,11 @@ export default function PantallaInicioSesion() {
 
     useEffect(() => {
         let data = localStorage.getItem("userRegistered");
-        if (data) {
+        
+        if(data){
             setUser(JSON.parse(data));
-        } else {
-            console.error("No se encontraron datos en localStorage para 'userRegistered'.");
+        }else{
+            console.error("No se encontraron datos");
         }
     }, []);
     
